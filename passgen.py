@@ -1,11 +1,21 @@
 #passgen#
 import sys, random, string
 
+len = 26
+
+def hexdigits():
+	while True:
+                try:
+                        char_set = string.hexdigits
+                        result = ''.join(random.sample(char_set*6, len))
+                        print result
+                except (KeyboardInterrupt):
+                        exit()
 def lowercase():
 	while True:
 		try:
 			char_set = string.ascii_lowercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -13,7 +23,7 @@ def lowerupper():
 	while True:
 		try:
 			char_set = string.ascii_lowercase + string.ascii_uppercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -21,7 +31,7 @@ def lowernum():
 	while True:
 		try:
 			char_set = string.ascii_lowercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -29,7 +39,7 @@ def uppernum():
 	while True:
 		try:
 			char_set = string.ascii_uppercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -37,7 +47,7 @@ def loweruppernum():
 	while True:
 		try:
 			char_set = string.ascii_uppercase + string.ascii_lowercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -45,7 +55,7 @@ def uppercase():
 	while True:
 		try:
 			char_set = string.ascii_uppercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -57,6 +67,8 @@ if args:
 	for arg in args:
 		if arg == '-l':
 			lowercase()
+		elif arg == '-h':
+			hexdigits()
 		elif arg == '-lU':
 			lowerupper()
 		elif arg == '-l1':
