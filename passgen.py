@@ -1,5 +1,17 @@
-#passgen#
+#Passgen 0.3.1#
 import sys, random, string
+
+print '''
+
+
+__________                        ________               
+\______   \_____    ______ ______/  _____/  ____   ____  
+ |     ___/\__  \  /  ___//  ___/   \  ____/ __ \ /    \ 
+ |    |     / __ \_\___ \ \___ \\    \_\  \  ___/|   |  \
+ |____|    (____  /____  >____  >\______  /\___  >___|  /
+                \/     \/     \/        \/     \/     \/ 
+
+'''
 
 def lowercase():
 	while True:
@@ -74,7 +86,7 @@ if args:
 				try:
 					char_set = sys.argv[2]
 					char_len = sys.argv[3]
-					result = ''.join([random.choice(char_set) for _ in range(int(char_len))])
+					result = ''.join([random.choice(char_set) for i in range(int(char_len))])
 					print result
 				except (IndexError):
 					print(IndexError, "Make sure you've added your character map and length")
