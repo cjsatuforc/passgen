@@ -32,5 +32,12 @@ base32 and hexdigits(merged fork)
 <br>
 Made the options listing more pretty.
 
+#Planned features for 0.4
+Support for popular tools such as aircrack baked in.
+<br>
+Adding new character permutations
+<br>
+Multithread support(Attempting to speed up key generation)
+
 #Screenshot
 ![alt tag](http://i.imgur.com/pg0aPhw.png)
