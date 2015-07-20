@@ -7,7 +7,7 @@ def base32():
 	while True:
 		try:
 			char_set = 'abcdefghijklmnopqrstuvwxyz234567'
-			result = ''.join(random.sample(char_set, len))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
