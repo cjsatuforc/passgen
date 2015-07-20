@@ -11,7 +11,6 @@ def base32():
 			print result
 		except (KeyboardInterrupt):
 			exit()
-
 def hexdigits():
 	while True:
 		try:
@@ -69,14 +68,14 @@ def uppercase():
 		except (KeyboardInterrupt):
 			exit()
 def arglist():
-	print 'options: -b32 base32, -h hexdigits, -l lowercase, -lU lower and uppercase, -l1 lower and numerals, -U upper ascii, -U1 upper and numerals, -lU1 lower, upper, and numerals, -C [char] [num] custom character set and length, --help this list'
+	print ('''options:\n -b32 base32\n -h hexdigits\n -l lowercase\n -lU lower and uppercase\n -l1 lower and numerals\n -U upper ascii\n -U1 upper and numerals\n -lU1 lower upper, and numerals\n -C [char] [num] custom character set and length\n --help this list\n''')
 
 args = sys.argv[1:]
 if args:
 	for arg in args:
 		if arg == '-l':
 			lowercase()
-		elif arg == 'b32':
+		elif arg == '-b32':
 			base32()
 		elif arg == '-h':
 			hexdigits()
