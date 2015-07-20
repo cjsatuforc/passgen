@@ -1,16 +1,25 @@
-#passgen 0.3.1#
+#passgen 0.3.2#
 import sys, random, string
 
-len = 26
+len = 8
+
+def base32():
+	while True:
+		try:
+			char_set = 'abcdefghijklmnopqrstuvwxyz234567'
+			result = ''.join(random.sample(char_set, len))
+			print result
+		except (KeyboardInterrupt):
+			exit()
 
 def hexdigits():
 	while True:
-                try:
-                        char_set = string.hexdigits
-                        result = ''.join(random.sample(char_set*6, len))
-                        print result
-                except (KeyboardInterrupt):
-                        exit()
+		try:
+			char_set = string.hexdigits
+			result = ''.join(random.sample(char_set*6, len))
+			print result
+		except (KeyboardInterrupt):
+			exit()
 def lowercase():
 	while True:
 		try:
@@ -60,13 +69,15 @@ def uppercase():
 		except (KeyboardInterrupt):
 			exit()
 def arglist():
-	print 'options: -l lowercase, -lU lower and uppercase, -l1 lower and numerals, -U upper ascii, -U1 upper and numerals, -lU1 lower, upper, and numerals, -C [char] [num] custom character set and length, --help this list'
+	print 'options: -b32 base32, -h hexdigits, -l lowercase, -lU lower and uppercase, -l1 lower and numerals, -U upper ascii, -U1 upper and numerals, -lU1 lower, upper, and numerals, -C [char] [num] custom character set and length, --help this list'
 
 args = sys.argv[1:]
 if args:
 	for arg in args:
 		if arg == '-l':
 			lowercase()
+		elif arg == 'b32':
+			base32()
 		elif arg == '-h':
 			hexdigits()
 		elif arg == '-lU':
