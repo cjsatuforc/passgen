@@ -1,23 +1,21 @@
-#Passgen 0.3.1#
+#passgen 0.3.1#
 import sys, random, string
 
-print '''
+len = 26
 
-
-__________                        ________               
-\______   \_____    ______ ______/  _____/  ____   ____  
- |     ___/\__  \  /  ___//  ___/   \  ____/ __ \ /    \ 
- |    |     / __ \_\___ \ \___ \\    \_\  \  ___/|   |  \
- |____|    (____  /____  >____  >\______  /\___  >___|  /
-                \/     \/     \/        \/     \/     \/ 
-
-'''
-
+def hexdigits():
+	while True:
+                try:
+                        char_set = string.hexdigits
+                        result = ''.join(random.sample(char_set*6, len))
+                        print result
+                except (KeyboardInterrupt):
+                        exit()
 def lowercase():
 	while True:
 		try:
 			char_set = string.ascii_lowercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -25,7 +23,7 @@ def lowerupper():
 	while True:
 		try:
 			char_set = string.ascii_lowercase + string.ascii_uppercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -33,7 +31,7 @@ def lowernum():
 	while True:
 		try:
 			char_set = string.ascii_lowercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -41,7 +39,7 @@ def uppernum():
 	while True:
 		try:
 			char_set = string.ascii_uppercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -49,7 +47,7 @@ def loweruppernum():
 	while True:
 		try:
 			char_set = string.ascii_uppercase + string.ascii_lowercase + string.digits
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -57,7 +55,7 @@ def uppercase():
 	while True:
 		try:
 			char_set = string.ascii_uppercase
-			result = ''.join(random.sample(char_set*6, 8))
+			result = ''.join(random.sample(char_set*6, len))
 			print result
 		except (KeyboardInterrupt):
 			exit()
@@ -69,6 +67,8 @@ if args:
 	for arg in args:
 		if arg == '-l':
 			lowercase()
+		elif arg == '-h':
+			hexdigits()
 		elif arg == '-lU':
 			lowerupper()
 		elif arg == '-l1':
@@ -86,7 +86,7 @@ if args:
 				try:
 					char_set = sys.argv[2]
 					char_len = sys.argv[3]
-					result = ''.join([random.choice(char_set) for i in range(int(char_len))])
+					result = ''.join([random.choice(char_set) for _ in range(int(char_len))])
 					print result
 				except (IndexError):
 					print(IndexError, "Make sure you've added your character map and length")
