@@ -27,3 +27,6 @@ Added in version 0.3.2
 base32 and hexdigits(merged fork)
 <br>
 Made the options listing more pretty.
+
+#Screenshot
+![alt tag](http://i.imgur.com/pg0aPhw.png)
