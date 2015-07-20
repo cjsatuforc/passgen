@@ -40,4 +40,4 @@ Adding new character permutations
 Multithread support(Attempting to speed up key generation)
 
 #Screenshot
-![alt tag](http://i.imgur.com/pg0aPhw.png)
+![alt tag](http://i.imgur.com/cXWBSpm.png)
