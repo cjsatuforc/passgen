@@ -6,6 +6,10 @@ example usuage with aircrack-ng (python passgen.py -l | sudo aircrack-ng --bssid
 
 argument switches are as followed
 <br>
+-b32 base32
+<br>
+-h hexcode
+<br>
 -l lowercase ascii
 <br>
 -l1 lowercase ascii + digits(0-9)
