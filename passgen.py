@@ -1,11 +1,11 @@
-#passgen 0.3.2#
-import sys, random, string
+#passgen 0.3.5#
+import sys, random, string, subprocess
 
 print '''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-'''
+               0.3.5'''
 
 len = 8
 
@@ -73,6 +73,19 @@ def uppercase():
 			print result
 		except (KeyboardInterrupt):
 			exit()
+def aircrack():
+	arglist()
+	characterset = raw_input('Enter permutation set: ')
+	bssid = raw_input('Enter bssid: ')
+	capfile = raw_input('Enter capfile: ')
+	try:
+		cmd = ['python passgen.py ' + characterset + ' | sudo aircrack-ng --bssid ' + bssid + ' -w- ' + capfile]
+		proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+		print proc.communicate()
+		exit()
+	except Exception as e:
+		print e
+		exit()
 def arglist():
 	print ('''options:\n -b32 base32\n -h hexdigits\n -l lowercase\n -lU lower and uppercase\n -l1 lower and numerals\n -U upper ascii\n -U1 upper and numerals\n -lU1 lower upper, and numerals\n -C [char] [num] custom character set and length\n --help this list\n''')
 
@@ -97,6 +110,8 @@ if args:
 			uppercase()
 		elif arg == '--help':
 			arglist()
+		elif arg == '-a':
+			aircrack()
 		elif arg == '-C':
 			while True:
 				try:
