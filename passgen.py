@@ -79,15 +79,23 @@ def aircrack():
 	bssid = raw_input('Enter bssid: ')
 	capfile = raw_input('Enter capfile: ')
 	try:
-		cmd = ['python passgen.py ' + characterset + ' | sudo aircrack-ng --bssid ' + bssid + ' -w- ' + capfile]
-		proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-		print proc.communicate()
+		cmd = (['python passgen.py ' + characterset + ' | sudo aircrack-ng --bssid ' + bssid + ' -w- ' + capfile])
+		proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
+		while proc.poll() == None:
+			pcrackOut = proc.stdout
+			nextline = proc.stdout.readlines()
+			print nextline
+		exit()
+	except KeyboardInterrupt:
+		proc.terminate()
+		proc.wait()
+		return
 		exit()
 	except Exception as e:
 		print e
 		exit()
 def arglist():
-	print ('''options:\n -b32 base32\n -h hexdigits\n -l lowercase\n -lU lower and uppercase\n -l1 lower and numerals\n -U upper ascii\n -U1 upper and numerals\n -lU1 lower upper, and numerals\n -C [char] [num] custom character set and length\n --help this list\n''')
+	print ('''options:\n -b32 base32\n -h hexdigits\n -l lowercase\n -lU lower and uppercase\n -l1 lower and numerals\n -U upper ascii\n -U1 upper and numerals\n -lU1 lower upper, and numerals\n -C [char] [num] custom character set and length\n -a aircrack-ng\n --help this list\n''')
 
 args = sys.argv[1:]
 if args:
