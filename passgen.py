@@ -1,16 +1,30 @@
-#passgen#
-import sys, random, string
+#passgen 0.3.5#
+import sys, random, string, subprocess
 
-len = 26
+print '''
+.---..---..---..---..---..---..-..-.
+| |-'| | | \ \  \ \ | |'_| |- | .` |
+`-'  `-^-'`---'`---'`-'-/`---'`-'`-'
+               0.3.7'''
 
+len = 8
+
+def base32():
+	while True:
+		try:
+			char_set = 'abcdefghijklmnopqrstuvwxyz234567'
+			result = ''.join(random.sample(char_set*6, len))
+			print result
+		except (KeyboardInterrupt):
+			exit()
 def hexdigits():
 	while True:
-                try:
-                        char_set = string.hexdigits
-                        result = ''.join(random.sample(char_set*6, len))
-                        print result
-                except (KeyboardInterrupt):
-                        exit()
+		try:
+			char_set = string.hexdigits
+			result = ''.join(random.sample(char_set*6, len))
+			print result
+		except (KeyboardInterrupt):
+			exit()
 def lowercase():
 	while True:
 		try:
@@ -59,14 +73,39 @@ def uppercase():
 			print result
 		except (KeyboardInterrupt):
 			exit()
+def aircrack():
+	arglist()
+	characterset = raw_input('Enter permutation set: ')
+	bssid = raw_input('Enter bssid: ')
+	capfile = raw_input('Enter capfile: ')
+	try:
+		cmd = (['python passgen.py ' + characterset + ' | sudo aircrack-ng --bssid ' + bssid + ' -w- ' + capfile])
+		proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
+		while proc.poll() == None:
+			pcrackOut = proc.stdout
+			nextline = proc.stdout.readlines()
+			print nextline
+		exit()
+	except KeyboardInterrupt:
+		proc.terminate()
+		proc.wait()
+		return
+		exit()
+	except Exception as e:
+		print e
+		proc.terminate()
+		proc.wait()
+		exit()
 def arglist():
-	print 'options: -l lowercase, -lU lower and uppercase, -l1 lower and numerals, -U upper ascii, -U1 upper and numerals, -lU1 lower, upper, and numerals, -C [char] [num] custom character set and length, --help this list'
+	print ('''options:\n -b32 base32\n -h hexdigits\n -l lowercase\n -lU lower and uppercase\n -l1 lower and numerals\n -U upper ascii\n -U1 upper and numerals\n -lU1 lower upper, and numerals\n -C [char] [num] custom character set and length\n -a aircrack-ng\n --help this list\n''')
 
 args = sys.argv[1:]
 if args:
 	for arg in args:
 		if arg == '-l':
 			lowercase()
+		elif arg == '-b32':
+			base32()
 		elif arg == '-h':
 			hexdigits()
 		elif arg == '-lU':
@@ -81,6 +120,8 @@ if args:
 			uppercase()
 		elif arg == '--help':
 			arglist()
+		elif arg == '-a':
+			aircrack()
 		elif arg == '-C':
 			while True:
 				try:
