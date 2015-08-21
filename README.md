@@ -1,4 +1,4 @@
-# Passgen 0.3.7
+# Passgen 0.4
 Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc).
 
 
@@ -6,28 +6,33 @@ example usuage with aircrack-ng (python passgen.py -l | sudo aircrack-ng --bssid
 
 argument switches are as followed
 <br>
--b32 base32
+-b32 [num] base32
 <br>
--h hexcode
+-h [num] hexcode
 <br>
--l lowercase ascii
+-l [num] lowercase ascii
 <br>
--l1 lowercase ascii + digits(0-9)
+-l1 [num] lowercase ascii + digits(0-9)
 <br>
--U uppercase ascii
+-U [num] uppercase ascii
 <br>
--U1 uppercase ascii + digits
+-U1 [num] uppercase ascii + digits
 <br>
--lU lowercase + uppercase ascii
+-lU [num] lowercase + uppercase ascii
 <br>
--lU1 lowercase + uppercase ascii + digits
+-lU1 [num] lowercase + uppercase ascii + digits
 <br>
 -C [char] [length] custom character set + length
 <br>
 -a aircrack-ng
 
 This application will be updated with new features as needed.
+
 #Changelog
+v0.4
+<br>
+Added new character length commandline argument
+<br>
 v0.3.7:Added -a for aircrack-ng support
 <br>
 Added in version 0.3.2
@@ -36,7 +41,7 @@ base32 and hexdigits(merged fork)
 <br>
 Made the options listing more pretty.
 
-#Planned features for 0.4
+#Planned features for 0.4.3
 Support for popular tools such as aircrack baked in.
 <br>
 Adding new character permutations
