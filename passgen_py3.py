@@ -22,17 +22,24 @@ def NonConsecutive():
     while True:
         try:
             index = int(bit_len)
+            NCLen = len(NCKey) - 1
             if len(NCKey) < index:
                 result = ''.join(random.sample(char_set*6, int(1)))
                 NCKey.append(str(result))
-            elif NCKey[0] == result:
-                print('A wild consecutive character appeared!')
+            elif NCKey[NCLen] == result:
+                NCKey.pop()
                 result = ''.join(random.sample(char_set*6, int(1)))
-                s = len(NCKey)/index+1
-                NCKey.insert(int(s), (str(result)))
-                print(''.join(NCKey))
+                if NCKey[0] == result:
+                    del NCKey[0]
+                    NCKey.append(str(result))
+                else:
+                    NCKey.insert(0, (str(result)))
+            #elif NCKey[0] == result:
+                #del NCKey[0]
+                #result = ''.join(random.sample(char_set*6, int(1)))
+                #NCKey.append(str(result))
+                #NCKey.insert(0, (str(result)))
             else:
-                print('Normal')
                 print(''.join(NCKey))
                 NCKey = []
         except (KeyboardInterrupt):
