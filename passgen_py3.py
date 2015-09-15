@@ -1,4 +1,4 @@
-#passgen 0.4.2#
+#passgen 0.4.3#
 import sys, random, string, subprocess, time
 from random import choice
 from os import urandom
@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4''')
+               0.4.3''')
 
 def KeyGenerate():
 	while True:
@@ -21,14 +21,18 @@ def NonConsecutive():
     NCKey = []
     while True:
         try:
-            char_set = string.ascii_lowercase + string.ascii_uppercase
+            char_set = string.ascii_letters
             index = int(bit_len)
             result = ''.join(random.sample(char_set*6, int(1)))
             if len(NCKey) < index:
                 NCKey.append(str(result))
-            print(''.join(NCKey))
-            time.sleep(0.01)
-            continue
+            elif NCKey[0] == result:
+                NCKey.reverse()
+                NCKey.insert(0, (str(result)))
+                print(''.join(NCKey))
+            else:
+                print(''.join(NCKey))
+                NCKey = []
         except (KeyboardInterrupt):
             exit()
 def aircrack():
