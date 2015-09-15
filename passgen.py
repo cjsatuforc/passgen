@@ -1,4 +1,4 @@
-#passgen 0.4.3#
+#passgen 0.4.3.1#
 import sys, random, string, subprocess, time
 from random import choice
 from os import urandom
@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4.3''')
+               0.4.3.1''')
 
 def KeyGenerate():
 	while True:
@@ -21,7 +21,6 @@ def NonConsecutive():
     NCKey = []
     while True:
         try:
-            char_set = string.ascii_letters
             index = int(bit_len)
             result = ''.join(random.sample(char_set*6, int(1)))
             if len(NCKey) < index:
@@ -99,7 +98,24 @@ try:
                 bit_len = sys.argv[2]
                 KeyGenerate()
             elif arg == '-NC':
-                bit_len = sys.argv[2]
+                chars = sys.argv[2]
+                if chars == "-l":
+                    char_set = string.ascii_lowercase
+                elif chars == '-b32':
+                    char_set = 'abcdefghijklmnopqrstuvwxyz234567'
+                elif chars == '-h':
+                    char_set = string.hexdigits
+                elif chars == '-lU':
+                    char_set = string.ascii_letters
+                elif chars == '-l1':
+                    char_set = string.ascii_lowercase + string.digits
+                elif chars == '-U1':
+                    char_set = string.ascii_uppercase + string.digits
+                elif chars == '-lU1':
+                    char_set = string.ascii_letters + string.digits
+                elif chars == '-U':
+                    char_set = string.ascii_uppercase
+                bit_len = sys.argv[3]
                 NonConsecutive()
             elif arg == '--help':
                 arglist()
