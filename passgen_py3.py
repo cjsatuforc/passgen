@@ -40,8 +40,11 @@ def NonConsecutive():
                 #whether or not that the character is equal to the first position of the list.
                 if NCKey[0] != str(result):
                     NCKey.insert(0, str(result))
+                elif NCKey[0] == str(result):
+                	result = ''.join(random.sample(char_set*6, int(1)))
                 else:
-                    #result = ''.join(random.sample(char_set*6, int(1)))
+                	pass
+     
             else:
                 print(''.join(NCKey))
                 NCKey = []
