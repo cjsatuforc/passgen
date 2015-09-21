@@ -17,28 +17,31 @@ def KeyGenerate():
 		except (KeyboardInterrupt):
 			exit()
 
+def Hex2Bin():
+    while True:
+        try:
+            result = ''.join(random.sample(char_set*6, int(bit_len)))
+            decoded  = ''.join(chr(int(result[i:i+2], 16)) for i in range(0, len(result), 2))
+            #print(str(decoded))
+            print(decoded)
+        except (KeyboardInterrupt):
+            exit()
+
 def NonConsecutive():
     NCKey = []
+    result = ''.join(random.sample(char_set*6, int(1)))#Generate random character, doesn't matter what this one is.
+    NCKey.insert(0, str(result))
     while True:
         try:
             index = int(bit_len)
             NCLen = len(NCKey) - 1
             if len(NCKey) < index:
-                result = ''.join(random.sample(char_set*6, int(1)))
-                NCKey.append(str(result))
-            elif NCKey[NCLen] == result:
-                NCKey.pop()
-                result = ''.join(random.sample(char_set*6, int(1)))
-                if NCKey[0] == result:
-                    del NCKey[0]
-                    NCKey.append(str(result))
+                result = ''.join(random.sample(char_set*6, int(1)))#Right here is where our problem is, It generates another character without checking
+                #whether or not that the character is equal to the first position of the list.
+                if NCKey[0] != str(result):
+                    NCKey.insert(0, str(result))
                 else:
-                    NCKey.insert(0, (str(result)))
-            #elif NCKey[0] == result:
-                #del NCKey[0]
-                #result = ''.join(random.sample(char_set*6, int(1)))
-                #NCKey.append(str(result))
-                #NCKey.insert(0, (str(result)))
+                    #result = ''.join(random.sample(char_set*6, int(1)))
             else:
                 print(''.join(NCKey))
                 NCKey = []
@@ -85,8 +88,12 @@ try:
                 KeyGenerate()
             elif arg == '-h':
                 char_set = string.hexdigits
-                bit_len = sys.argv[2]
-                KeyGenerate()
+                if sys.argv[2] == "-b":
+                    bit_len = sys.argv[3]
+                    Hex2Bin()
+                else:
+                    bit_len = sys.argv[2]
+                    KeyGenerate()
             elif arg == '-lU':
                 char_set = string.ascii_letters
                 bit_len = sys.argv[2]
