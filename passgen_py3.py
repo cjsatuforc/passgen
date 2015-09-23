@@ -34,17 +34,14 @@ def NonConsecutive():
     while True:
         try:
             index = int(bit_len)
-            NCLen = len(NCKey) - 1
             if len(NCKey) < index:
-                result = ''.join(random.sample(char_set*6, int(1)))#Right here is where our problem is, It generates another character without checking
-                #whether or not that the character is equal to the first position of the list.
+                result = ''.join(random.sample(char_set*6, int(1)))
                 if NCKey[0] != str(result):
                     NCKey.insert(0, str(result))
                 elif NCKey[0] == str(result):
-                	result = ''.join(random.sample(char_set*6, int(1)))
+                    result = ''.join(random.sample(char_set*6, int(1)))
                 else:
-                	pass
-     
+                    result = ''.join(random.sample(char_set*6, int(1)))
             else:
                 print(''.join(NCKey))
                 NCKey = []
