@@ -1,4 +1,4 @@
-#passgen 0.4.3.1#
+#passgen 0.4.3.4#
 import sys, random, string, subprocess, time
 from random import choice
 from os import urandom
@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4.3.1''')
+               0.4.3.4''')
 
 def KeyGenerate():
 	while True:
@@ -29,7 +29,7 @@ def Hex2Bin():
 
 def NonConsecutive():
     NCKey = []
-    result = ''.join(random.sample(char_set*6, int(1)))#Generate random character, doesn't matter what this one is.
+    result = ''.join(random.sample(char_set*6, int(1)))
     NCKey.insert(0, str(result))
     while True:
         try:
@@ -72,7 +72,22 @@ def aircrack():
         proc.wait()
         exit()
 def arglist():
-	print ('''options:\n -b32 [num] base32\n -h [num] hexdigits\n -l [num] lowercase\n -lU [num] lower and uppercase\n -l1 [num] lower and numerals\n -U [num] upper ascii\n -U1 [num] upper and numerals\n -lU1 [num] lower upper, and numerals\n -C [char] [num] custom character set and length\n -a aircrack-ng\n --help this list\n''')
+	print ('''options:\n -b32 [num] base32\n -h [num] hexdigits\n -l [num] lowercase\n -lU [num] lower and uppercase\n -l1 [num] lower and numerals\n -U [num] upper ascii\n -U1 [num] upper and numerals\n -lU1 [num] lower upper, and numerals\n -C [char] [num] custom character set and length\n -a aircrack-ng\n -NC [-char] [num] Nonconsecutive character permutations\n SpeedTest is a speed test...\n --help this list\n''')
+
+def SpeedTest():
+    char_set = string.ascii_letters + string.digits
+    keylist = []
+    while True:
+        mytime = time.time()
+        try:
+            while int(time.time() - int(mytime)) != 1:
+                result = ''.join(random.sample(char_set*6, 8))
+                keylist.append(str(result))
+                KeysAsec = len(keylist) + 1
+            print(str(KeysAsec) + "k/s")
+            keylist = []
+        except (KeyboardInterrupt):
+            exit()
 
 args = sys.argv[1:]
 try:
@@ -82,6 +97,8 @@ try:
                 char_set = string.ascii_lowercase
                 bit_len = sys.argv[2]
                 KeyGenerate()
+            elif arg == 'SpeedTest':
+                SpeedTest()
             elif arg == '-b32':
                 char_set = 'abcdefghijklmnopqrstuvwxyz234567'
                 bit_len = sys.argv[2]
