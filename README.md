@@ -1,4 +1,4 @@
-# Passgen 0.4.3.4
+# Passgen 0.4.4
 Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc).
 
 
@@ -31,6 +31,10 @@ argument switches are as followed
 This application will be updated with new features as needed.
 
 #Changelog
+v0.4.4
+<br>
+Fixed -NC switch, Nonconsecutive character set works properly now.
+<br>
 v0.4.3.4
 <br>
 Added SpeedTest switch
@@ -49,8 +53,7 @@ base32 and hexdigits(merged fork)
 <br>
 Made the options listing more pretty.
 
-#Planned features for 0.4.3
-Support for popular tools such as aircrack baked in.
+#Planned features for 0.4.5
 <br>
 Adding new character permutations
 <br>
