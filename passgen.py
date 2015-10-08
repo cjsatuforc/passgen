@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4.3.4''')
+               0.4.4''')
 
 def KeyGenerate():
 	while True:
@@ -22,31 +22,30 @@ def Hex2Bin():
         try:
             result = ''.join(random.sample(char_set*6, int(bit_len)))
             decoded  = ''.join(chr(int(result[i:i+2], 16)) for i in range(0, len(result), 2))
-            #print(str(decoded))
             print(decoded)
         except (KeyboardInterrupt):
             exit()
 
 def NonConsecutive():
     NCKey = []
+    index = int(bit_len)
     result = ''.join(random.sample(char_set*6, int(1)))
     NCKey.insert(0, str(result))
     while True:
         try:
-            index = int(bit_len)
-            if len(NCKey) < index:
+            while len(NCKey) < index:
                 result = ''.join(random.sample(char_set*6, int(1)))
                 if NCKey[0] != str(result):
                     NCKey.insert(0, str(result))
-                elif NCKey[0] == str(result):
-                    result = ''.join(random.sample(char_set*6, int(1)))
                 else:
                     result = ''.join(random.sample(char_set*6, int(1)))
             else:
                 print(''.join(NCKey))
                 NCKey = []
+                NCKey.insert(0, str(result))
         except (KeyboardInterrupt):
             exit()
+
 def aircrack():
     arglist()
     characterset = raw_input('Enter permutation set: ')
@@ -132,25 +131,29 @@ try:
                 bit_len = sys.argv[2]
                 KeyGenerate()
             elif arg == '-NC':
-                chars = sys.argv[2]
-                if chars == "-l":
-                    char_set = string.ascii_lowercase
-                elif chars == '-b32':
-                    char_set = 'abcdefghijklmnopqrstuvwxyz234567'
-                elif chars == '-h':
-                    char_set = string.hexdigits
-                elif chars == '-lU':
-                    char_set = string.ascii_letters
-                elif chars == '-l1':
-                    char_set = string.ascii_lowercase + string.digits
-                elif chars == '-U1':
-                    char_set = string.ascii_uppercase + string.digits
-                elif chars == '-lU1':
-                    char_set = string.ascii_letters + string.digits
-                elif chars == '-U':
-                    char_set = string.ascii_uppercase
-                bit_len = sys.argv[3]
-                NonConsecutive()
+                while True:
+                    try:
+                        chars = sys.argv[2]
+                        if chars == "-l":
+                            char_set = string.ascii_lowercase
+                        elif chars == '-b32':
+                            char_set = 'abcdefghijklmnopqrstuvwxyz234567'
+                        elif chars == '-h':
+                            char_set = string.hexdigits
+                        elif chars == '-lU':
+                            char_set = string.ascii_letters
+                        elif chars == '-l1':
+                            char_set = string.ascii_lowercase + string.digits
+                        elif chars == '-U1':
+                            char_set = string.ascii_uppercase + string.digits
+                        elif chars == '-lU1':
+                            char_set = string.ascii_letters + string.digits
+                        elif chars == '-U':
+                            char_set = string.ascii_uppercase
+                        bit_len = sys.argv[3]
+                        NonConsecutive()
+                    except(KeyboardInterrupt):
+                        exit()
             elif arg == '--help':
                 arglist()
             elif arg == '-a':
