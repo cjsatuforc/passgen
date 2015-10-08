@@ -26,7 +26,7 @@ argument switches are as followed
 <br>
 -a aircrack-ng
 <br>
--NC (-NC -lU1 -8) Nonconsecutive with permutations character set and character length
+-NC (-NC -lU1 8) Nonconsecutive with permutations character set and character length
 
 This application will be updated with new features as needed.
 
