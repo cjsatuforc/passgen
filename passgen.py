@@ -1,5 +1,5 @@
-#passgen 0.4.3.4#
-import sys, random, string, subprocess, time
+#passgen 0.4.5#
+import sys, random, string, subprocess, time, hashlib, binascii
 from random import choice
 from os import urandom
 
@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4.4''')
+               0.4.5''')
 
 def KeyGenerate():
 	while True:
@@ -44,6 +44,22 @@ def NonConsecutive():
                 NCKey = []
                 NCKey.insert(0, str(result))
         except (KeyboardInterrupt):
+            exit()
+
+def ntlm():
+    while True:
+        try:
+            result = ''.join(random.sample(char_set*6, int(bit_len)))
+            hash2 = hashlib.new('md4',str(result).encode('utf-16le')).digest()
+            hash3 = binascii.hexlify(hash2)
+            print("Hash: " + hash3 + " " + "Password: " + result)
+            if hash3 == hash1:
+                print("Found matching hash and password")
+                print(result)
+                exit()
+            else:
+                continue
+        except(KeyboardInterrupt):
             exit()
 
 def aircrack():
@@ -130,6 +146,28 @@ try:
                 char_set = string.ascii_uppercase
                 bit_len = sys.argv[2]
                 KeyGenerate()
+            elif arg == '-ntlm':
+                while True:
+                    chars = sys.argv[2]
+                    if chars == "-l":
+                        char_set = string.ascii_lowercase
+                    elif chars == '-b32':
+                        char_set = 'abcdefghijklmnopqrstuvwxyz234567'
+                    elif chars == '-h':
+                        char_set = string.hexdigits
+                    elif chars == '-lU':
+                        char_set = string.ascii_letters
+                    elif chars == '-l1':
+                        char_set = string.ascii_lowercase + string.digits
+                    elif chars == '-U1':
+                        char_set = string.ascii_uppercase + string.digits
+                    elif chars == '-lU1':
+                        char_set = string.ascii_letters + string.digits
+                    elif chars == '-U':
+                        char_set = string.ascii_uppercase
+                    bit_len = sys.argv[3]
+                    hash1 = raw_input("Insert Windows Hash: ")
+                    ntlm()
             elif arg == '-NC':
                 while True:
                     try:
