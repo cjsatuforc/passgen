@@ -1,4 +1,4 @@
-# Passgen 0.4.4
+# Passgen 0.4.5
 Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc).
 
 
@@ -27,10 +27,16 @@ argument switches are as followed
 -a aircrack-ng
 <br>
 -NC (-NC -lU1 8) Nonconsecutive with permutations character set and character length
+<br>
+-ntlm [char] [length] Windows Hash bruteforce attack
 
 This application will be updated with new features as needed.
 
 #Changelog
+v0.4.5
+<br>
+Added -ntlm switch
+<br>
 v0.4.4
 <br>
 Fixed -NC switch, Nonconsecutive character set works properly now.
@@ -53,7 +59,11 @@ base32 and hexdigits(merged fork)
 <br>
 Made the options listing more pretty.
 
-#Planned features for 0.4.5
+#Planned features for 0.4.6
+<br>
+Cleaning up redundant character permutation code
+<br>
+getting -NC to work with -a, -ntlm, -C
 <br>
 Adding new character permutations
 <br>
