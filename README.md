@@ -61,6 +61,8 @@ Made the options listing more pretty.
 
 #Planned features for 0.4.6
 <br>
+New algorithm that mimics hashcats Mask attack.
+<br>
 Cleaning up redundant character permutation code
 <br>
 getting -NC to work with -a, -ntlm, -C
