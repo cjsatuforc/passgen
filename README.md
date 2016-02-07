@@ -1,11 +1,10 @@
-# Passgen 0.4.5
-Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc).
-
-#Passgen for Julia
+#Passgen for Julia 0.1.9
 Please refer to the julia.md file as well as passgen.jl for information on this code.
 <br>
-The julia port is superior to the python version in terms of speed and size.
+The julia port is superior to the python version in terms of speed and size
 
+# Passgen for Python 0.4.5
+Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc)..
 
 example usuage with aircrack-ng (python passgen.py -l | sudo aircrack-ng --bssid 00:11:22:33:44:55 -w- WiFi.cap)
 
