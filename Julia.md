@@ -4,5 +4,23 @@ Julia - lowercase at 10 character length = 253,301K/s, CPU 27%
 <br>
 Python - lowercase at 10 character length = 92,135K/s, CPU 100%
 <br>
-Obviously with these results we see that Julia is a superior language in terms of speed, I am expecting a full port to be finished
-within the month. Check back for more.
+As of 02/07/16 The julia port is a working replacement for Passgen.py and will continue to be developed ahead of the
+python version.
+<br>
+Command line arguments are as followed
+<br>
+<br>
+lowercase = -l [num] -n
+<br>
+uppercase = -u [num] -n
+<br>
+lower + upper = -lu [num] -n
+<br>
+lower + upper + nums = -lun [num] -n
+<br>
+lower + num = -ln [num] -n
+<br>
+upper + num = -un [num] -n
+<br>
+<br>
+The third argument can be replaced with -ntlm to generate windows hashes.
