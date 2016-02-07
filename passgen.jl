@@ -1,3 +1,5 @@
+using Nettle
+
 function gen_pass()
 	v = ARGS[2]
 	f_set = Any[]
@@ -9,12 +11,23 @@ function gen_pass()
 		end
 	end
 z_set = join(f_set)
-println(z_set)
+if ARGS[3] == "-ntlm"
+	h = Hasher("MD4")
+	update!(h, z_set)
+	h = hexdigest!(h)
+	println(h)
+elseif ARGS[3] == "-n"
+	println(z_set)
+else
+	println("Refer to argument switches")
+end
 end
 
 lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+b32 = ['2', '3', '4', '5', '6', '7']
+
 while true
 	if ARGS[1] == "-l"
 		global c_set = lower
@@ -40,8 +53,12 @@ while true
                 global c_set = vcat(upper, num)
                 global z = length(c_set)
                 gen_pass()
-    elseif ARGS[1] == "-lun"
+	elseif ARGS[1] == "-lun"
 		global c_set = vcat(lower, upper, num)
+		global z = length(c_set)
+		gen_pass()
+	elseif ARGS[1] == "-b32"
+		global c_set = vcat(lower, b32)
 		global z = length(c_set)
 		gen_pass()
 	else
