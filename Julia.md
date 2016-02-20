@@ -7,6 +7,11 @@ Python - lowercase at 10 character length = 92,135K/s, CPU 100%
 As of 02/07/16 The julia port is a working replacement for Passgen.py and will continue to be developed ahead of the
 python version.
 <br>
+Dependencies[Nettle]
+<br>
+Pkg.add("Nettle")
+<br>
+<br>
 Command line arguments are as followed
 <br>
 <br>
