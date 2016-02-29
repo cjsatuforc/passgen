@@ -1,7 +1,13 @@
-#Passgen for Julia 0.1.9
+#Passgen for Julia 0.2
 Please refer to the julia.md file as well as passgen.jl for information on this code.
 <br>
 The julia port is superior to the python version in terms of speed and size
+<br>
+<br>
+Arguments: "julia passgen.jl -l 10 -n"
+<br>
+           "julia passgen.jl [character set] [length] [type]"
+<br>
 
 # Passgen for Python 0.4.5
 Passgen is an alternative for the random character generator crunch which attempts to solve cracking WPA/WPA2 keys by randomizing the output opposed to generating a list like so, (aaaaaaaa, aaaaaaab, aaaaaac, etc)..
