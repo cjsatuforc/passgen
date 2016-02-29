@@ -10,7 +10,7 @@ function gen_pass()
 			end
 		end
 	end
-z_set = join(f_set)
+global z_set = join(f_set)
 if ARGS[3] == "-ntlm"
 	h = Hasher("MD4")
 	update!(h, z_set)
@@ -18,9 +18,21 @@ if ARGS[3] == "-ntlm"
 	println(h)
 elseif ARGS[3] == "-n"
 	println(z_set)
+elseif ARGS[3] == "-p"
+	gen_perm()
 else
 	println("Refer to argument switches")
 end
+end
+
+function gen_perm()
+	i = 0
+	for p in permutations(split(z_set, ""))
+		print(join(p), "\n")
+		i += 1
+		i %= 12
+		i != 0
+	end
 end
 
 lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -46,13 +58,13 @@ while true
 		global z = length(c_set)
 		gen_pass()
 	elseif ARGS[1] == "-ln"
-                global c_set = vcat(lower, num)
-                global z = length(c_set)
-                gen_pass()
+		global c_set = vcat(lower, num)
+		global z = length(c_set)
+		gen_pass()
 	elseif ARGS[1] == "-un"
-                global c_set = vcat(upper, num)
-                global z = length(c_set)
-                gen_pass()
+		global c_set = vcat(upper, num)
+		global z = length(c_set)
+		gen_pass()
 	elseif ARGS[1] == "-lun"
 		global c_set = vcat(lower, upper, num)
 		global z = length(c_set)
