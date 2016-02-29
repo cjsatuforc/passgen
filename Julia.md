@@ -32,4 +32,4 @@ lower + num = -ln [num] -n
 upper + num = -un [num] -n
 <br>
 <br>
-The third argument can be replaced with -ntlm to generate windows hashes.
+The third argument allows different forms of output(-n(normal), -ntlm(md4_Windows hash), -p(Permutations)
