@@ -1,10 +1,10 @@
-Porting to Julia attempts to fix the speed issues found in python as of this writing The julia port out performs python by a huge margin
+Porting to Julia attempts to fix the speed issues found in python as of this writing The julia port out performs python by at least 95%.(Processor speed dependent of course)
 <br>
 <br>
-Julia - lowercase at 10 character length = 968,085K/s, CPU 27%
+Julia - lowercase at 10 character length = 968,085K/s(Intel core i3 2.5Ghz dual core + dual hyperthread), CPU 27%
 <br>
 <br>
-Python - lowercase at 10 character length = 92,135K/s, CPU 100%
+Python - lowercase at 10 character length = 92,135K/s(Intel core i3 2.5Ghz dual core + dual hyperthread), CPU 100%
 <br>
 <br>
 As of 02/07/16 The julia port is a working replacement for Passgen.py and will continue to be developed ahead of the
