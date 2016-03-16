@@ -1,4 +1,4 @@
-#Passgen for Julia 0.2
+#Passgen for Julia 0.2.1
 Please refer to the julia.md file as well as passgen.jl for information on this code.
 <br>
 The julia port is superior to the python version in terms of speed and size
