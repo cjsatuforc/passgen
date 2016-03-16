@@ -3,7 +3,7 @@ using Nettle
 function gen_pass()
 	v = ARGS[2]
 	f_set = Any[]
-	while length(f_set) != int(v)
+	while length(f_set) != parse(Int, v)
 		for i in rand(1:z)
 			for x in c_set[i]
 				push!(f_set, x)
