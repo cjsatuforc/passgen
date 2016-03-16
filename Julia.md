@@ -1,7 +1,7 @@
 Porting to Julia attempts to fix the speed issues found in python as of this writing The julia port out performs python by a huge margin
 <br>
 <br>
-Julia - lowercase at 10 character length = 253,301K/s, CPU 27%
+Julia - lowercase at 10 character length = 968,085K/s, CPU 27%
 <br>
 <br>
 Python - lowercase at 10 character length = 92,135K/s, CPU 100%
