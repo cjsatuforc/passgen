@@ -1,8 +1,15 @@
 using Nettle
 
+pass = 0
+
 function input(prompt::AbstractString = "")
 	print(prompt * " ")
 	chomp(readline())
+end
+
+function ask_pass()
+	global pass = 1
+	global hash = input("Enter Windows Hash: ")
 end
 
 function gen_pass()
@@ -18,10 +25,19 @@ function gen_pass()
 	end
 global z_set = join(f_set)
 if ARGS[3] == "-ntlm"
-	h = Hasher("MD4")
-	update!(h, z_set)
-	h = hexdigest!(h)
-	println(h)
+	if pass != 1
+		ask_pass()
+	else
+		h = Hasher("MD4")
+		update!(h, z_set)
+		h = hexdigest!(h)
+		if hash == h
+			println(z_set, ":", h)
+			exit()
+		else
+			println(h)
+		end
+	end
 elseif ARGS[3] == "-norm"
 	println(z_set)
 elseif ARGS[3] == "-perm"
