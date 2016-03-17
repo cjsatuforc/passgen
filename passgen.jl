@@ -21,9 +21,9 @@ if ARGS[3] == "-ntlm"
 	update!(h, z_set)
 	h = hexdigest!(h)
 	println(h)
-elseif ARGS[3] == "-n"
+elseif ARGS[3] == "-norm"
 	println(z_set)
-elseif ARGS[3] == "-p"
+elseif ARGS[3] == "-perm"
 	gen_perm()
 else
 	println("Refer to argument switches")
