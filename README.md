@@ -6,6 +6,8 @@ Julia 0.4 and higher
 <br>
 Nettle - Pkg.add("nettle") in REPL
 <br>
+<br>
+<br>
 Arguments: "julia passgen.jl -l 10 -n"
 <br>
            "julia passgen.jl [character set] [length] [type]"
