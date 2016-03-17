@@ -1,5 +1,10 @@
 using Nettle
 
+function input(prompt::AbstractString = "")
+	print(prompt * " ")
+	chomp(readline())
+end
+
 function gen_pass()
 	v = ARGS[2]
 	f_set = Any[]
