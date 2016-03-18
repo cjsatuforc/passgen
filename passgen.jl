@@ -12,6 +12,34 @@ function ask_pass()
 	global hash = input("Enter Windows Hash: ")
 end
 
+function ntlm_hash()
+if pass != 1
+	count = 0
+	ask_pass()
+else
+	h = Hasher("MD4")
+	update!(h, z_set)
+	h = hexdigest!(h)
+	if hash == h
+		println("\n")
+		println(z_set, ":", h)
+		exit()
+	else
+		println(z_set, ":", h)
+	end
+end
+end
+
+function gen_perm()
+	i = 0
+	for p in permutations(split(z_set, ""))
+		print(join(p), "\n")
+		i += 1
+		i %= 12
+		i != 0
+	end
+end
+
 function gen_pass()
 	v = ARGS[2]
 	global z = length(c_set)
@@ -25,19 +53,7 @@ function gen_pass()
 	end
 global z_set = join(f_set)
 if ARGS[3] == "-ntlm"
-	if pass != 1
-		ask_pass()
-	else
-		h = Hasher("MD4")
-		update!(h, z_set)
-		h = hexdigest!(h)
-		if hash == h
-			println(z_set, ":", h)
-			exit()
-		else
-			println(h)
-		end
-	end
+	ntlm_hash()
 elseif ARGS[3] == "-norm"
 	println(z_set)
 elseif ARGS[3] == "-perm"
@@ -45,16 +61,6 @@ elseif ARGS[3] == "-perm"
 else
 	println("Refer to argument switches")
 end
-end
-
-function gen_perm()
-	i = 0
-	for p in permutations(split(z_set, ""))
-		print(join(p), "\n")
-		i += 1
-		i %= 12
-		i != 0
-	end
 end
 
 lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
