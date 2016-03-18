@@ -94,7 +94,7 @@ while true
 		global c_set = vcat(lower, b32)
 		gen_pass()
 	else
-		println("Arguments: -l [num], -u [num]")
+		println("Arguments: -l [num] -norm")
 		break
 	end
 end
