@@ -2,7 +2,7 @@
 The julia port is superior to the python version in terms of speed and size
 <br>
 #Requirements
-Julia 0.4 and higher
+Julia 0.4 and higher(If using an older version you'll have to change AbstractString to String manually as of version 0.2.2)
 <br>
 Nettle - Pkg.add("nettle") in REPL
 <br>
