@@ -1,4 +1,4 @@
-#passgen 0.4.5#
+#passgen 0.4.6#
 import sys, random, string, subprocess, time, hashlib, binascii
 from random import choice
 from os import urandom
@@ -7,7 +7,7 @@ print('''
 .---..---..---..---..---..---..-..-.
 | |-'| | | \ \  \ \ | |'_| |- | .` |
 `-'  `-^-'`---'`---'`-'-/`---'`-'`-'
-               0.4.5''')
+               0.4.6''')
 
 def KeyGenerate():
 	while True:
@@ -40,7 +40,7 @@ def NonConsecutive():
                 else:
                     result = ''.join(random.sample(char_set*6, int(1)))
             else:
-                print(''.join(NCKey))
+                print((''.join(NCKey)))
                 NCKey = []
                 NCKey.insert(0, str(result))
         except (KeyboardInterrupt):
@@ -52,7 +52,7 @@ def ntlm():
             result = ''.join(random.sample(char_set*6, int(bit_len)))
             hash2 = hashlib.new('md4',str(result).encode('utf-16le')).digest()
             hash3 = binascii.hexlify(hash2)
-            print("Hash: " + hash3 + " " + "Password: " + result)
+            print(("Hash: " + hash3 + " " + "Password: " + result))
             if hash3 == hash1:
                 print("Found matching hash and password")
                 print(result)
@@ -64,10 +64,10 @@ def ntlm():
 
 def aircrack():
     arglist()
-    characterset = raw_input('Enter permutation set: ')
-    bit_len = raw_input('Enter character size: ')
-    bssid = raw_input('Enter bssid: ')
-    capfile = raw_input('Enter capfile: ')
+    characterset = input('Enter permutation set: ')
+    bit_len = input('Enter character size: ')
+    bssid = input('Enter bssid: ')
+    capfile = input('Enter capfile: ')
     try:
         cmd = (['python passgen.py ' + characterset + ' | sudo aircrack-ng --bssid ' + bssid + ' -w- ' + capfile])
         proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, shell=True)
@@ -99,7 +99,7 @@ def SpeedTest():
                 result = ''.join(random.sample(char_set*6, 8))
                 keylist.append(str(result))
                 KeysAsec = len(keylist) + 1
-            print(str(KeysAsec) + "k/s")
+            print((str(KeysAsec) + "k/s"))
             keylist = []
         except (KeyboardInterrupt):
             exit()
@@ -166,7 +166,7 @@ try:
                     elif chars == '-U':
                         char_set = string.ascii_uppercase
                     bit_len = sys.argv[3]
-                    hash1 = raw_input("Insert Windows Hash: ")
+                    hash1 = input("Insert Windows Hash: ")
                     ntlm()
             elif arg == '-NC':
                 while True:
@@ -204,10 +204,10 @@ try:
                         result = ''.join([random.choice(char_set) for _ in range(int(char_len))])
                         print(result)
                     except (IndexError):
-                        print(IndexError, "Make sure you've added your character map and length")
+                        print((IndexError, "Make sure you've added your character map and length"))
                         exit()
                     except (ValueError):
-                        print(ValueError, 'ValueError: sample larger than population')
+                        print((ValueError, 'ValueError: sample larger than population'))
                         exit()
                     except (KeyboardInterrupt):
                         exit()
