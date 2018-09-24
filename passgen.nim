@@ -1,6 +1,5 @@
 ##Passgen 0.1 for Nim 0.18.0
-import os, strutils, hashes, random, sequtils
-
+import os, strutils, hashes, random, sequtils, typeinfo
 #Compiler options
 {.deadCodeElim:on, checks:off, hints:off, warnings:off.}
 
@@ -11,48 +10,54 @@ var
   hashGen = newSeq[string](0)
   asciiGen: seq[string]
   asciiCat: seq[string]
+let hashLen = commandlineParams()
 
 asciiGen = @[]
 asciiCat = @[]
 
-proc hashType =
-  echo "Hash Type: "
-  let charGen = readLine(stdin)
-  if charGen == "-u":
-    for i in asciiUp:
-      asciiGen.add(i)
-  elif charGen == "-l":
-    for i in asciiLow:
-      asciiGen.add(i)
-  elif charGen == "-d":
-    for i in digitGen:
-      asciiGen.add(i)
-  elif charGen == "-ul":
-    asciiCat = concat(asciiLow, asciiUp)
-    for i in asciiCat:
-      asciiGen.add(i)
-  elif charGen == "-ud":
-    asciiCat = concat(asciiUp, digitGen)
-    for i in asciiCat:
-      asciiGen.add(i)
-  elif charGen == "-ld":
-    asciiCat = concat(asciiLow, digitGen)
-    for i in asciiCat:
-      asciiGen.add(i)
-  elif charGen == "-uld":
-    asciiCat = concat(asciiLow, asciiUp, digitGen)
-    for i in asciiCat:
-      asciiGen.add(i)
-  else:
-    echo "command unknown"
+proc cmdArgs() =
+  if hashLen.len() > 2:
+    echo "Invalid argument detected"
     quit()
-
-hashType()
-echo "Hash Length: "
-let hashLen = readLine(stdin)
-if parseInt(hashLen) <= 0:
-  echo "Invalid hash length"
-  quit()
+  elif hashLen.len() != 2:
+    echo "Invalid argument detected"
+    quit()
+  else:
+    let charGen = commandLineParams()
+    if charGen[0] == "-u":
+      for i in asciiUp:
+        asciiGen.add(i)
+    elif charGen[0] == "-l":
+      for i in asciiLow:
+        asciiGen.add(i)
+    elif charGen[0] == "-d":
+      for i in digitGen:
+        asciiGen.add(i)
+    elif charGen[0] == "-ul":
+      asciiCat = concat(asciiLow, asciiUp)
+      for i in asciiCat:
+        asciiGen.add(i)
+    elif charGen[0] == "-ud":
+      asciiCat = concat(asciiUp, digitGen)
+      for i in asciiCat:
+        asciiGen.add(i)
+    elif charGen[0] == "-ld":
+      asciiCat = concat(asciiLow, digitGen)
+      for i in asciiCat:
+        asciiGen.add(i)
+    elif charGen[0] == "-uld":
+      asciiCat = concat(asciiLow, asciiUp, digitGen)
+      for i in asciiCat:
+        asciiGen.add(i)
+    else:
+      echo "command unknown"
+      echo "Valid commands: -u, -l, -d, -ul, -ud, -ld, -uld"
+      quit()
+    if parseInt(hashLen[1]) <= 0:
+      echo "Invalid hash length"
+      quit()
+    else:
+      echo ""
 
 proc delHash =
   while hashGen.len != 0:
@@ -63,7 +68,7 @@ proc delHash =
 proc genHash(): string {.discardable.} =
   randomize()
   var v = 0
-  for v in countup(0, parseInt(hashLen) - 1):
+  for v in countup(0, parseInt(hashLen[1]) - 1):
     shuffle(asciiGen)
     hashGen.add(asciiGen[v])
   let hashString = join(hashGen)
@@ -71,6 +76,12 @@ proc genHash(): string {.discardable.} =
   delHash()
 
 proc main {.discardable.} =
+  cmdArgs()
   while true:
+    type KeyboardInterrupt = object of Exception
+    proc handler() {.noconv.} =
+      echo "Ctrl + C detected quitting...\n"
+      quit()
+    setControlCHook(handler)
     genHash()
 main()
