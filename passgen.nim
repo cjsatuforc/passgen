@@ -13,7 +13,13 @@ var
 echo "Hash Length: "
 let hashLen = readLine(stdin)
 
-proc main =
+proc delHash =
+  while hashGen.len != 0:
+    for i, x in hashGen:
+      hashGen.delete(i)
+      break
+
+proc genHash(): string {.discardable.} =
   randomize()
   var v = 0
   for v in countup(0, parseInt(hashLen) - 1):
@@ -21,5 +27,9 @@ proc main =
     hashGen.add(asciiGen[v])
   let hashString = join(hashGen)
   echo hashString
-main()
+  delHash()
 
+proc main {.discardable.} =
+  while true:
+    genHash()
+main()
